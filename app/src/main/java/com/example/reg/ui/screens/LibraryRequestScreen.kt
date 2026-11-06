@@ -20,72 +20,25 @@ fun LibraryRequestScreen(viewModel: RegistrationViewModel = viewModel()) {
     val result by viewModel.libraryResult.collectAsState()
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier = Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Text(
-            text = "Library Book Request",
-            style = MaterialTheme.typography.headlineMedium
-        )
-        Text(
-            text = "Request a book from the university library",
-            style = MaterialTheme.typography.bodyMedium
-        )
-
-        OutlinedTextField(
-            value = isbn,
-            onValueChange = { isbn = it },
-            label = { Text("Book ISBN") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            value = author,
-            onValueChange = { author = it },
-            label = { Text("Author") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            value = title,
-            onValueChange = { title = it },
-            label = { Text("Title") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            value = dateBorrowed,
-            onValueChange = { dateBorrowed = it },
-            label = { Text("Date Borrowed (YYYY-MM-DD)") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            value = dateReturn,
-            onValueChange = { dateReturn = it },
-            label = { Text("Date of Return (YYYY-MM-DD)") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            value = studentIdNo,
-            onValueChange = { studentIdNo = it },
-            label = { Text("Student ID Number") },
-            modifier = Modifier.fillMaxWidth()
-        )
+        Text(text = "Library Book Request", style = MaterialTheme.typography.headlineMedium)
+        Text(text = "Request a book from the university library", style = MaterialTheme.typography.bodyMedium)
+        OutlinedTextField(value = isbn, onValueChange = { isbn = it }, label = { Text("Book ISBN") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = author, onValueChange = { author = it }, label = { Text("Author") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = title, onValueChange = { title = it }, label = { Text("Title") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = dateBorrowed, onValueChange = { dateBorrowed = it }, label = { Text("Date Borrowed (YYYY-MM-DD)") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = dateReturn, onValueChange = { dateReturn = it }, label = { Text("Date of Return (YYYY-MM-DD)") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = studentIdNo, onValueChange = { studentIdNo = it }, label = { Text("Student ID Number") }, modifier = Modifier.fillMaxWidth())
 
         if (result != null) {
-            Text(
-                text = result!!,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.primary
-            )
+            Text(text = result!!, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.primary)
         }
 
         Button(
-            onClick = {
-                viewModel.requestLibraryBook(isbn, author, title, dateBorrowed, dateReturn, studentIdNo)
-            },
+            onClick = { viewModel.requestLibraryBook(isbn, author, title, dateBorrowed, dateReturn, studentIdNo) },
             enabled = isbn.isNotBlank() && author.isNotBlank() && title.isNotBlank() && dateBorrowed.isNotBlank() && dateReturn.isNotBlank() && studentIdNo.isNotBlank()
-        ) {
-            Text("Submit Request")
-        }
+        ) { Text("Submit Request") }
     }
 }
